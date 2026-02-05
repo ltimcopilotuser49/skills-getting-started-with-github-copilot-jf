@@ -58,7 +58,6 @@ activities = {
             "max_participants": 20,
             "participants": ["ethan@mergington.edu"]
             },
-            "Chess C
         "description": "Learn strategies and compete in chess tournaments",
         "schedule": "Fridays, 3:30 PM - 5:00 PM",
         "max_participants": 12,
