@@ -22,6 +22,43 @@ app.mount("/static", StaticFiles(directory=os.path.join(Path(__file__).parent,
 # In-memory activity database
 activities = {
     "Chess Club": {
+        "Soccer Team": {
+            "description": "Join our varsity soccer team and compete against other schools",
+            "schedule": "Mondays and Wednesdays, 4:00 PM - 6:00 PM",
+            "max_participants": 25,
+            "participants": ["alex@mergington.edu", "sarah@mergington.edu"]
+            },
+            "Swimming Club": {
+            "description": "Improve your swimming techniques and participate in swim meets",
+            "schedule": "Tuesdays and Thursdays, 4:00 PM - 5:30 PM",
+            "max_participants": 15,
+            "participants": ["james@mergington.edu"]
+            },
+            "Drama Club": {
+            "description": "Perform in school plays and develop your acting skills",
+            "schedule": "Wednesdays, 3:30 PM - 5:30 PM",
+            "max_participants": 25,
+            "participants": ["emily@mergington.edu", "lucas@mergington.edu"]
+            },
+            "Art Studio": {
+            "description": "Explore painting, drawing, and sculpture techniques",
+            "schedule": "Thursdays, 3:30 PM - 5:00 PM",
+            "max_participants": 18,
+            "participants": ["mia@mergington.edu"]
+            },
+            "Debate Team": {
+            "description": "Develop public speaking and argumentation skills through competitive debates",
+            "schedule": "Tuesdays, 3:30 PM - 5:00 PM",
+            "max_participants": 16,
+            "participants": ["william@mergington.edu", "ava@mergington.edu"]
+            },
+            "Science Olympiad": {
+            "description": "Compete in science and engineering challenges at regional competitions",
+            "schedule": "Saturdays, 10:00 AM - 12:00 PM",
+            "max_participants": 20,
+            "participants": ["ethan@mergington.edu"]
+            },
+            "Chess C
         "description": "Learn strategies and compete in chess tournaments",
         "schedule": "Fridays, 3:30 PM - 5:00 PM",
         "max_participants": 12,
@@ -61,6 +98,10 @@ def signup_for_activity(activity_name: str, email: str):
 
     # Get the specific activity
     activity = activities[activity_name]
+
+    # Validate student is not already signed up
+    if email in activities.get(activity_name, {}).get("participants", []):
+        raise HTTPException(status_code=400, detail="Student already signed up for this activity")
 
     # Add student
     activity["participants"].append(email)
